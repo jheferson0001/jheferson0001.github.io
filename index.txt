@@ -1,0 +1,292 @@
+<index html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Interactivo de Superación (IDPR)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            height: 300px;
+            max-height: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input[type="radio"]:checked {
+            box-shadow: 0 0 0 3px theme('colors.teal.300');
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+    <!-- Chosen Palette: Calm Harmony (Light Gray/White Background with Teal Accent) -->
+    <!-- Application Structure Plan: La aplicación sigue un flujo de tarea lineal y lógico: 1. Cabecera (Título y Propósito), 2. Instrucciones Claras, 3. Formulario del Test (agrupado en las 3 secciones temáticas para coherencia), 4. Botón de Acción (Calcular), 5. Sección de Resultados (oculta por defecto). Esta estructura transforma el "reporte" (un test manual) en una "aplicación" interactiva. El usuario actúa (responde preguntas) y recibe retroalimentación instantánea (resultados visuales y textuales), lo cual es el objetivo principal. El flujo es más intuitivo que el documento original, ya que elimina la necesidad de cálculos manuales e interpretación de tablas. -->
+    <!-- Visualization & Content Choices: 
+        - Reporte (Preguntas 1-18): Objetivo: Recolectar datos. Presentación: Formulario HTML con inputs de radio. Interacción: El usuario selecciona una opción (1-5) por pregunta. Justificación: Método estándar y accesible para escalas Likert.
+        - Reporte (Cálculo PE): Objetivo: Procesar puntaje. Presentación: Lógica de JavaScript. Interacción: Se dispara al hacer clic en el botón "Calcular". Justificación: Automatiza la parte más compleja para el usuario, dando valor instantáneo.
+        - Reporte (Resultados): Objetivo: Mostrar el resultado personalizado. Presentación: Sección HTML (div) que se muestra dinámicamente. Contiene el % (texto), el nivel (texto), la interpretación (texto) y un gráfico. Interacción: El contenido se puebla vía JS. Justificación: Presenta la conclusión de forma clara.
+        - Reporte (Porcentaje numérico): Objetivo: Visualizar el puntaje. Presentación: Gráfico de Dona (Chart.js Canvas). Interacción: El gráfico se renderiza/actualiza con los datos del usuario (PE vs 100-PE). Justificación: Un gráfico es mucho más impactante y fácil de interpretar que un simple número, mejorando la usabilidad.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <div class="container mx-auto max-w-4xl p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-teal-800 mb-3">Inventario de Desconexión Post-Relación (IDPR)</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Este test es una herramienta de auto-evaluación para valorar tu grado de <strong>enganche emocional</strong> (apego residual, rumiación cognitiva y dependencia conductual) que aún mantienes con una ex-pareja.</p>
+        </header>
+
+        <div class="bg-blue-50 border-l-4 border-blue-400 text-blue-800 p-5 rounded-md shadow-sm mb-8">
+            <h2 class="font-bold text-xl mb-2">Instrucciones</h2>
+            <p>Por favor, califica cada una de las siguientes 18 afirmaciones en una escala del 1 al 5, seleccionando el número que mejor represente tu situación actual.</p>
+            <ul class="list-disc list-inside mt-3 space-y-1 text-sm">
+                <li><strong>1 - Totalmente en desacuerdo:</strong> Esto no me sucede en absoluto.</li>
+                <li><strong>2 - En desacuerdo:</strong> Me sucede muy rara vez o lo he superado casi por completo.</li>
+                <li><strong>3 - Neutral:</strong> Me sucede a veces, pero no domina mi vida.</li>
+                <li><strong>4 - De acuerdo:</strong> Me sucede con cierta frecuencia y me genera malestar.</li>
+                <li><strong>5 - Totalmente de acuerdo:</strong> Esto es una realidad constante en mi vida.</li>
+            </ul>
+        </div>
+
+        <form id="idpr-form" class="space-y-10">
+            
+            <!-- Sección 1 -->
+            <section>
+                <h2 class="text-2xl font-semibold text-teal-700 mb-2 border-b-2 border-teal-100 pb-2">SECCIÓN 1: Rumiación Cognitiva y Apego Emocional</h2>
+                <p class="text-gray-600 mb-6 text-sm">Evalúa la frecuencia y la naturaleza de los pensamientos y sentimientos que te vinculan a tu ex.</p>
+                <div class="space-y-6">
+                    <!-- Preguntas 1-6 -->
+                </div>
+            </section>
+
+            <!-- Sección 2 -->
+            <section>
+                <h2 class="text-2xl font-semibold text-teal-700 mb-2 border-b-2 border-teal-100 pb-2">SECCIÓN 2: Independencia Conductual y Social</h2>
+                <p class="text-gray-600 mb-6 text-sm">Evalúa el nivel de autonomía y la reorientación de tu vida personal sin tu ex-pareja.</p>
+                <div class="space-y-6">
+                    <!-- Preguntas 7-12 -->
+                </div>
+            </section>
+
+            <!-- Sección 3 -->
+            <section>
+                <h2 class="text-2xl font-semibold text-teal-700 mb-2 border-b-2 border-teal-100 pb-2">SECCIÓN 3: Reencuadre y Aceptación</h2>
+                <p class="text-gray-600 mb-6 text-sm">Evalúa tu capacidad para ver la relación pasada de manera objetiva y aceptar la realidad de la ruptura.</p>
+                <div class="space-y-6">
+                    <!-- Preguntas 13-18 -->
+                </div>
+            </section>
+
+            <div class="text-center pt-6">
+                <button type="submit" class="bg-teal-600 text-white font-bold py-3 px-10 rounded-lg shadow-lg hover:bg-teal-700 transition duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-teal-300 text-lg">
+                    Calcular Resultados
+                </button>
+                <p id="validation-message" class="text-red-500 text-center mt-4 hidden">Por favor, responde todas las 18 preguntas para calcular tu resultado.</p>
+            </div>
+        </form>
+
+        <!-- Sección de Resultados -->
+        <section id="results-section" class="hidden mt-12 pt-8">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-6">Tus Resultados</h2>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl border border-gray-100">
+                <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                    
+                    <div class="chart-container">
+                        <canvas id="result-chart"></canvas>
+                    </div>
+
+                    <div class="flex flex-col justify-center">
+                        <p class="text-lg text-gray-600">Tu Porcentaje de Enganche (PE) es:</p>
+                        <p id="result-percentage" class="text-6xl font-bold text-teal-700 my-2">0%</p>
+                        <h3 id="result-level" class="text-2xl font-semibold text-gray-900 mt-3"></h3>
+                        <p id="result-interpretation" class="text-gray-600 mt-2 text-base"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-12 pt-8 border-t border-gray-200 text-center">
+            <h3 class="text-xl font-semibold text-gray-700 mb-3">Reflexión Final</h3>
+            <p class="text-gray-600 max-w-3xl mx-auto text-sm">Recuerda que este es un instrumento de autoconocimiento. El objetivo no es juzgarte, sino iluminar las áreas donde tu energía vital aún está invertida en el pasado. La superación no es un interruptor, sino un proceso gradual. Usa este resultado para decidir dónde poner tu esfuerzo a partir de ahora.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const questions = [
+            "Sigo monitoreando sus redes sociales (o busco saber de él/ella indirectamente) al menos una vez a la semana.",
+            "Cuando pienso en el pasado, me enfoco principalmente en los 'mejores momentos' y tiendo a idealizar la relación.",
+            "La idea de que mi ex esté con otra persona me causa una angustia o celos significativos.",
+            "Siento un impulso frecuente (varias veces al día) de contactarle o responder a sus mensajes/llamadas.",
+            "Invierto una cantidad considerable de energía mental en analizar qué salió mal o en planear un posible reencuentro.",
+            "Guardo objetos, regalos o recuerdos de la relación en un lugar visible o fácil de acceder.",
+            "Evito ciertos lugares, canciones, películas o actividades porque me recuerdan a mi ex o a la relación.",
+            "Mis planes futuros (viajes, carrera, hogar) se sienten incompletos o menos emocionantes sin él/ella en ellos.",
+            "Cuando hablo con amigos o familiares, mi ex o la ruptura es un tema recurrente de conversación.",
+            "Me cuesta mucho disfrutar de mis pasatiempos, actividades sociales o rutinas que no incluyen recuerdos de la relación.",
+            "Si me encuentro con él/ella, mi estado emocional (alegría, tristeza, ansiedad) cambia drásticamente para el resto del día.",
+            "Siento que he perdido parte de mi identidad o propósito desde que terminó la relación.",
+            "Todavía culpo a mi ex (o solo a mí) por el fracaso de la relación, sin ver una responsabilidad compartida o factores externos.",
+            "Si pudiera volver el tiempo atrás, cambiaría activamente las cosas para 'salvar' la relación.",
+            "Me siento estancado/a en mi crecimiento personal porque estoy esperando una señal o una disculpa de mi ex.",
+            "Cuando recuerdo los aspectos negativos o dañinos de la relación, los minimizo o justifico.",
+            "Siento que la relación con mi ex es el estándar contra el cual mido y descarto posibles parejas futuras.",
+            "Pienso que, a pesar de la ruptura, de alguna manera 'siempre estaremos juntos' o 'volveremos.'"
+        ];
+
+        const interpretations = {
+            level1: {
+                level: "Superación Total o Casi Total",
+                interpretation: "El ex y la relación son recuerdos del pasado. Hay una aceptación plena de la ruptura y tu vida está totalmente orientada al futuro. La energía emocional y mental está canalizada en tu crecimiento y nuevas experiencias."
+            },
+            level2: {
+                level: "Superación Sólida",
+                interpretation: "Has recorrido la mayor parte del camino. Ocasionalmente, puedes tener pensamientos o sentimientos residuales, pero no interfieren significativamente con tu vida diaria. Eres funcional e independiente."
+            },
+            level3: {
+                level: "Zona de Transición",
+                interpretation: "Estás en medio del proceso. Hay días buenos y días malos. Si bien has logrado independencia conductual, la rumiación cognitiva o el apego emocional aún te afectan. Es un buen momento para enfocarse en la aceptación."
+            },
+            level4: {
+                level: "Enganche Significativo",
+                interpretation: "El apego es notable. La relación con tu ex o la ruptura es un tema central en tu vida emocional. Es probable que haya patrones conductuales de auto-sabotaje o idealización. Se recomienda intensificar el enfoque en el cuidado personal y la desconexión total (digital y física)."
+            },
+            level5: {
+                level: "Enganche Alto/No Superado",
+                interpretation: "La ruptura no ha sido procesada. Existe una dependencia emocional o psicológica que está impidiendo tu avance. La idealización es alta y la vida se siente estancada. Es crucial buscar apoyo profesional (terapia psicológica) para sanar el proceso de duelo y reestructurar tu auto-concepto."
+            }
+        };
+
+        let resultChartInstance = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('idpr-form');
+            const sections = form.querySelectorAll('section > div.space-y-6');
+            
+            questions.forEach((q, index) => {
+                const qNumber = index + 1;
+                const sectionIndex = Math.floor(index / 6);
+                const questionHTML = `
+                    <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+                        <label class="font-semibold block mb-4 text-gray-700">${qNumber}. ${q}</label>
+                        <div class="flex flex-wrap justify-between gap-2 md:gap-4 px-2 md:px-6">
+                            ${[1, 2, 3, 4, 5].map(i => `
+                                <label class="flex flex-col items-center p-2 rounded-lg hover:bg-gray-100 cursor-pointer space-y-1 w-12 text-center">
+                                    <span class="text-lg font-semibold text-gray-800">${i}</span>
+                                    <input type="radio" name="q${qNumber}" value="${i}" class="h-5 w-5 text-teal-600 focus:ring-teal-500 border-gray-300" required>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                sections[sectionIndex].innerHTML += questionHTML;
+            });
+
+            const resultsSection = document.getElementById('results-section');
+            const validationMessage = document.getElementById('validation-message');
+            const resultPercentage = document.getElementById('result-percentage');
+            const resultLevel = document.getElementById('result-level');
+            const resultInterpretation = document.getElementById('result-interpretation');
+            const chartCanvas = document.getElementById('result-chart').getContext('2d');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                let totalScore = 0;
+                let answeredQuestions = 0;
+                
+                for (let i = 1; i <= 18; i++) {
+                    const value = formData.get('q' + i);
+                    if (value) {
+                        totalScore += parseInt(value, 10);
+                        answeredQuestions++;
+                    }
+                }
+
+                if (answeredQuestions < 18) {
+                    validationMessage.classList.remove('hidden');
+                    resultsSection.classList.add('hidden');
+                    return;
+                }
+
+                validationMessage.classList.add('hidden');
+                
+                const percentage = ((totalScore - 18) / 72) * 100;
+                const pe = Math.round(percentage);
+                
+                let resultData;
+                if (pe <= 20) resultData = interpretations.level1;
+                else if (pe <= 40) resultData = interpretations.level2;
+                else if (pe <= 60) resultData = interpretations.level3;
+                else if (pe <= 80) resultData = interpretations.level4;
+                else resultData = interpretations.level5;
+
+                resultPercentage.textContent = pe + '%';
+                resultLevel.textContent = resultData.level;
+                resultInterpretation.textContent = resultData.interpretation;
+                
+                updateChart(pe);
+                
+                resultsSection.classList.remove('hidden');
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            function updateChart(pe) {
+                const data = {
+                    labels: ['Porcentaje de Enganche', 'Porcentaje Superado'],
+                    datasets: [{
+                        data: [pe, 100 - pe],
+                        backgroundColor: [
+                            '#0D9488', // teal-700
+                            '#F0FDF4'  // green-50 (representando superación)
+                        ],
+                        borderColor: [
+                            '#0D9488',
+                            '#F0FDF4'
+                        ],
+                        borderWidth: 1,
+                        hoverOffset: 4
+                    }]
+                };
+
+                if (resultChartInstance) {
+                    resultChartInstance.destroy();
+                }
+
+                resultChartInstance = new Chart(chartCanvas, {
+                    type: 'doughnut',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '70%',
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20,
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: ${context.raw}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
